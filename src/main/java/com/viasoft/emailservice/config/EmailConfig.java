@@ -6,7 +6,6 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * Configuração para o serviço de email.
- *
  * Esta classe centraliza as configurações relacionadas
  * ao provedor de email e outras configurações do sistema.
  *
@@ -17,6 +16,9 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class EmailConfig {
 
+    /**
+     * Configuração do provedor de email integrado ao sistema.
+     */
     @Value("${mail.integracao:AWS}")
     private String mailIntegracao;
 
@@ -31,8 +33,9 @@ public class EmailConfig {
             return EmailProvider.fromValue(mailIntegracao);
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException(
-                    "Provedor de email inválido configurado: " + mailIntegracao +
-                            ". Valores válidos: AWS, OCI", e
+                    "Provedor de email inválido configurado: "
+                            + mailIntegracao
+                            + ". Valores válidos: AWS, OCI", e
             );
         }
     }
@@ -49,9 +52,9 @@ public class EmailConfig {
     /**
      * Define o provedor de email (usado principalmente para testes).
      *
-     * @param mailIntegracao provedor a ser configurado
+     * @param mailProvider provedor a ser configurado
      */
-    public void setMailIntegracao(String mailIntegracao) {
-        this.mailIntegracao = mailIntegracao;
+    public void setMailIntegracao(final String mailProvider) {
+        this.mailIntegracao = mailProvider;
     }
 }
