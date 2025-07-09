@@ -91,6 +91,9 @@ public class EmailServiceImpl implements EmailService {
         } catch (IllegalArgumentException e) {
             logger.error("Erro de validação ao processar email: {}", e.getMessage());
             throw e;
+        } catch (EmailProcessingException e) {
+            logger.error("Erro ao processar email: {}", e.getMessage(), e);
+            throw e;
         } catch (Exception e) {
             logger.error("Erro inesperado ao processar email: {}", e.getMessage(), e);
             throw new EmailProcessingException(
