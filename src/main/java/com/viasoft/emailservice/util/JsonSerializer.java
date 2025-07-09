@@ -19,6 +19,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class JsonSerializer {
 
+    /**
+     * Mapper responsável pela conversão de objetos para JSON.
+     */
     private final ObjectMapper objectMapper;
 
     /**
@@ -36,7 +39,7 @@ public class JsonSerializer {
      * @return representação JSON do objeto
      * @throws EmailProcessingException se ocorrer erro na serialização
      */
-    public String serialize(Object object) {
+    public String serialize(final Object object) {
         try {
             return objectMapper.writeValueAsString(object);
         } catch (JsonProcessingException e) {
@@ -53,13 +56,14 @@ public class JsonSerializer {
      * @return representação JSON compacta do objeto
      * @throws EmailProcessingException se ocorrer erro na serialização
      */
-    public String serializeCompact(Object object) {
+    public String serializeCompact(final Object object) {
         try {
             ObjectMapper compactMapper = new ObjectMapper();
             return compactMapper.writeValueAsString(object);
         } catch (JsonProcessingException e) {
             throw new EmailProcessingException(
-                    "Erro ao serializar objeto para JSON compacto: " + e.getMessage(), e
+                    "Erro ao serializar objeto para JSON compacto: "
+                            + e.getMessage(), e
             );
         }
     }
