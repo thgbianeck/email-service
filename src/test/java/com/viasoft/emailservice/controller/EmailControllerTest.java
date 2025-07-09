@@ -22,9 +22,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Testes unitários para EmailController.
  *
- * @author Viasoft
+ * @author Thiago Bianeck
  * @version 1.0.0
- * @since 2024
+ * @since 2025
  */
 @WebMvcTest(EmailController.class)
 class EmailControllerTest {
