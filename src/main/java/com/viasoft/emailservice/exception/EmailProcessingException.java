@@ -18,7 +18,7 @@ public class EmailProcessingException extends RuntimeException {
      *
      * @param message mensagem de erro
      */
-    public EmailProcessingException(String message) {
+    public EmailProcessingException(final String message) {
         super(message);
     }
 
@@ -28,7 +28,8 @@ public class EmailProcessingException extends RuntimeException {
      * @param message mensagem de erro
      * @param cause causa da exceção
      */
-    public EmailProcessingException(String message, Throwable cause) {
+    public EmailProcessingException(final String message,
+                                    final Throwable cause) {
         super(message, cause);
     }
 }
