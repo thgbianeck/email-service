@@ -4,7 +4,6 @@ import com.viasoft.emailservice.dto.EmailRequestDTO;
 
 /**
  * Interface do serviço de email.
- *
  * Define o contrato para processamento de emails,
  * aplicando o princípio da Inversão de Dependência (DIP).
  *
@@ -16,7 +15,6 @@ public interface EmailService {
 
     /**
      * Processa uma requisição de email.
-     *
      * Este método é responsável por:
      * - Adaptar os dados para o provedor configurado
      * - Serializar o objeto adaptado

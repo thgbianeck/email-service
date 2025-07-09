@@ -7,7 +7,6 @@ import jakarta.validation.constraints.Size;
 
 /**
  * DTO para recebimento de dados de email na requisição.
- *
  * Esta classe representa o objeto de entrada padrão que será
  * adaptado para os diferentes provedores de email.
  *

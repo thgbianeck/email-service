@@ -97,11 +97,11 @@ public class EmailServiceImpl implements EmailService {
             String jsonResult = jsonSerializer.serialize(adaptedEmail);
 
             // Imprimir no console conforme requisito
-            System.out.println("=== EMAIL PROCESSADO ===");
-            System.out.println("Provedor: " + provider.getValue());
-            System.out.println("JSON Serializado:");
-            System.out.println(jsonResult);
-            System.out.println("========================");
+            LOGGER.info("=== EMAIL PROCESSADO ===");
+            LOGGER.info("Provedor: " + provider.getValue());
+            LOGGER.info("JSON Serializado:");
+            LOGGER.info(jsonResult);
+            LOGGER.info("========================");
 
             LOGGER.info("Email processado com sucesso para provedor: {}",
                     provider.getValue());

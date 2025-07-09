@@ -7,7 +7,6 @@ import jakarta.validation.constraints.Size;
 
 /**
  * DTO específico para o provedor AWS.
- *
  * Esta classe representa a estrutura de dados necessária
  * para envio de emails através da plataforma Amazon Web Services.
  *
