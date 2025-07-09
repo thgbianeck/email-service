@@ -19,7 +19,8 @@ import org.springframework.stereotype.Service;
  * aplicando os padrões Strategy e Adapter para
  * adaptar dados conforme o provedor configurado.
  * Aplica os princípios:
- * - Single Responsibility Principle (SRP): responsável apenas pelo processamento de emails
+ * - Single Responsibility Principle (SRP): responsável apenas pelo
+ *   processamento de emails
  * - Dependency Inversion Principle (DIP): depende de abstrações
  * - Open/Closed Principle (OCP): aberto para extensão de novos provedores
  *
@@ -30,26 +31,41 @@ import org.springframework.stereotype.Service;
 @Service
 public class EmailServiceImpl implements EmailService {
 
-    private static final Logger logger = LoggerFactory.getLogger(EmailServiceImpl.class);
+    /**
+     * Logger para registrar eventos e erros da classe.
+     */
+    private static final Logger LOGGER =
+            LoggerFactory.getLogger(EmailServiceImpl.class);
 
+    /**
+     * Configuração de email contendo as propriedades do provedor.
+     */
     private final EmailConfig emailConfig;
+
+    /**
+     * Factory responsável por criar adaptadores de email.
+     */
     private final EmailAdapterFactory adapterFactory;
+
+    /**
+     * Serializador JSON para conversão de objetos.
+     */
     private final JsonSerializer jsonSerializer;
 
     /**
      * Construtor com injeção de dependências.
      *
-     * @param emailConfig configuração de email
-     * @param adapterFactory factory de adaptadores
-     * @param jsonSerializer serializador JSON
+     * @param emailConfigParam configuração de email
+     * @param adapterFactoryParam factory de adaptadores
+     * @param jsonSerializerParam serializador JSON
      */
     @Autowired
-    public EmailServiceImpl(EmailConfig emailConfig,
-                            EmailAdapterFactory adapterFactory,
-                            JsonSerializer jsonSerializer) {
-        this.emailConfig = emailConfig;
-        this.adapterFactory = adapterFactory;
-        this.jsonSerializer = jsonSerializer;
+    public EmailServiceImpl(final EmailConfig emailConfigParam,
+                            final EmailAdapterFactory adapterFactoryParam,
+                            final JsonSerializer jsonSerializerParam) {
+        this.emailConfig = emailConfigParam;
+        this.adapterFactory = adapterFactoryParam;
+        this.jsonSerializer = jsonSerializerParam;
     }
 
     /**
@@ -59,22 +75,23 @@ public class EmailServiceImpl implements EmailService {
      * @throws EmailProcessingException se ocorrer erro no processamento
      */
     @Override
-    public void processEmail(EmailRequestDTO emailRequest) {
+    public void processEmail(final EmailRequestDTO emailRequest) {
         try {
-            logger.info("Iniciando processamento de email para: {}",
+            LOGGER.info("Iniciando processamento de email para: {}",
                     emailRequest.getEmailDestinatario());
 
             // Obter o provedor configurado
             EmailProvider provider = emailConfig.getEmailProvider();
-            logger.debug("Provedor configurado: {}", provider.getValue());
+            LOGGER.debug("Provedor configurado: {}", provider.getValue());
 
             // Criar o adaptador apropriado
             EmailAdapter<?> adapter = adapterFactory.createAdapter(provider);
-            logger.debug("Adaptador criado: {}", adapter.getClass().getSimpleName());
+            LOGGER.debug("Adaptador criado: {}",
+                    adapter.getClass().getSimpleName());
 
             // Adaptar os dados
             Object adaptedEmail = adapter.adapt(emailRequest);
-            logger.debug("Dados adaptados com sucesso");
+            LOGGER.debug("Dados adaptados com sucesso");
 
             // Serializar em JSON
             String jsonResult = jsonSerializer.serialize(adaptedEmail);
@@ -86,16 +103,19 @@ public class EmailServiceImpl implements EmailService {
             System.out.println(jsonResult);
             System.out.println("========================");
 
-            logger.info("Email processado com sucesso para provedor: {}", provider.getValue());
+            LOGGER.info("Email processado com sucesso para provedor: {}",
+                    provider.getValue());
 
         } catch (IllegalArgumentException e) {
-            logger.error("Erro de validação ao processar email: {}", e.getMessage());
+            LOGGER.error("Erro de validação ao processar email: {}",
+                    e.getMessage());
             throw e;
         } catch (EmailProcessingException e) {
-            logger.error("Erro ao processar email: {}", e.getMessage(), e);
+            LOGGER.error("Erro ao processar email: {}", e.getMessage(), e);
             throw e;
         } catch (Exception e) {
-            logger.error("Erro inesperado ao processar email: {}", e.getMessage(), e);
+            LOGGER.error("Erro inesperado ao processar email: {}",
+                    e.getMessage(), e);
             throw new EmailProcessingException(
                     "Erro inesperado durante o processamento do email", e
             );
