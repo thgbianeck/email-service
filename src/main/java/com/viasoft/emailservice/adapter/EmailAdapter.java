@@ -19,7 +19,8 @@ import com.viasoft.emailservice.dto.EmailRequestDTO;
 public interface EmailAdapter<T> {
 
     /**
-     * Adapta os dados de email do formato padrão para o formato específico do provedor.
+     * Adapta os dados de email do formato padrão para o formato específico
+     * do provedor.
      *
      * @param emailRequest dados de email no formato padrão
      * @return dados adaptados para o provedor específico

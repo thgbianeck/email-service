@@ -13,16 +13,20 @@ import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Controller REST para operações de email.
  * Esta classe expõe endpoints REST para processamento
  * de emails, seguindo as melhores práticas de APIs RESTful.
  * Aplica os princípios:
- * - Single Responsibility Principle (SRP): responsável apenas pela camada de apresentação
+ * - Single Responsibility Principle (SRP): responsável apenas pela
+ *   camada de apresentação
  * - Dependency Inversion Principle (DIP): depende da abstração do serviço
  *
  * @author Thiago Bianeck
@@ -34,18 +38,25 @@ import org.springframework.web.bind.annotation.*;
 @Tag(name = "Email", description = "API para processamento de emails")
 public class EmailController {
 
-    private static final Logger logger = LoggerFactory.getLogger(EmailController.class);
+    /**
+     * Logger para registrar eventos e operações da classe.
+     */
+    private static final Logger LOGGER =
+            LoggerFactory.getLogger(EmailController.class);
 
+    /**
+     * Serviço responsável pelo processamento de emails.
+     */
     private final EmailService emailService;
 
     /**
      * Construtor com injeção de dependência.
      *
-     * @param emailService serviço de email
+     * @param emailServiceParam serviço de email
      */
     @Autowired
-    public EmailController(EmailService emailService) {
-        this.emailService = emailService;
+    public EmailController(final EmailService emailServiceParam) {
+        this.emailService = emailServiceParam;
     }
 
     /**
@@ -59,7 +70,8 @@ public class EmailController {
     @PostMapping("/send")
     @Operation(
             summary = "Processar email",
-            description = "Processa dados de email adaptando para o provedor configurado (AWS/OCI)"
+            description = "Processa dados de email adaptando para o "
+                    + "provedor configurado (AWS/OCI)"
     )
     @ApiResponses(value = {
             @ApiResponse(
@@ -84,16 +96,17 @@ public class EmailController {
             )
     })
     public ResponseEntity<Void> sendEmail(
-            @Parameter(description = "Dados do email a ser enviado", required = true)
-            @Valid @RequestBody EmailRequestDTO emailRequest) {
+            @Parameter(description = "Dados do email a ser enviado",
+                    required = true)
+            @Valid @RequestBody final EmailRequestDTO emailRequest) {
 
-        logger.info("Recebida requisição de envio de email para: {}",
+        LOGGER.info("Recebida requisição de envio de email para: {}",
                 emailRequest.getEmailDestinatario());
 
         // Processar o email através do serviço
         emailService.processEmail(emailRequest);
 
-        logger.info("Email processado com sucesso");
+        LOGGER.info("Email processado com sucesso");
 
         // Retornar status 204 conforme especificação
         return ResponseEntity.noContent().build();

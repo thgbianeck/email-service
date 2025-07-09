@@ -13,24 +13,25 @@ package com.viasoft.emailservice.enums;
 public enum EmailProvider {
 
     /**
-     * Provedor Amazon Web Services (AWS)
+     * Provedor Amazon Web Services (AWS).
      */
     AWS("AWS"),
 
     /**
-     * Provedor Oracle Cloud Infrastructure (OCI)
+     * Provedor Oracle Cloud Infrastructure (OCI).
      */
     OCI("OCI");
 
+    /** Valor string do provedor de email. */
     private final String value;
 
     /**
      * Construtor do enum.
      *
-     * @param value valor string do provedor
+     * @param providerValue valor string do provedor
      */
-    EmailProvider(String value) {
-        this.value = value;
+    EmailProvider(final String providerValue) {
+        this.value = providerValue;
     }
 
     /**
@@ -45,16 +46,17 @@ public enum EmailProvider {
     /**
      * Converte uma string para o enum correspondente.
      *
-     * @param value valor a ser convertido
+     * @param inputValue valor a ser convertido
      * @return enum correspondente
      * @throws IllegalArgumentException se o valor não for válido
      */
-    public static EmailProvider fromValue(String value) {
+    public static EmailProvider fromValue(final String inputValue) {
         for (EmailProvider provider : EmailProvider.values()) {
-            if (provider.value.equalsIgnoreCase(value)) {
+            if (provider.value.equalsIgnoreCase(inputValue)) {
                 return provider;
             }
         }
-        throw new IllegalArgumentException("Provedor de email inválido: " + value);
+        throw new IllegalArgumentException(
+                "Provedor de email inválido: " + inputValue);
     }
 }
