@@ -1,12 +1,11 @@
 # Configuração do provedor de email (AWS ou OCI)
-  mail:
-    integracao: AWS
+mail:
+  integracao: AWS
 
 # Configurações da aplicação
 server:
-  port: 8088
+  port: 8080
   servlet:
-    # Caminho base da API
     context-path: /api/v1
 
 # Configurações de logging
@@ -16,7 +15,7 @@ logging:
       viasoft:
         emailservice: DEBUG
   pattern:
-    console: %d{yyyy-MM-dd HH:mm:ss} - %msg%n
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
 
 # Configurações do Swagger/OpenAPI
 springdoc:
@@ -24,7 +23,7 @@ springdoc:
     path: /api-docs
   swagger-ui:
     path: /swagger-ui.html
-    operations-sorter: method
+    operationsSorter: method
 
 # Informações da aplicação
 info:
