@@ -7,9 +7,9 @@ package com.viasoft.emailservice.exception;
  * o processamento de emails, como problemas de adaptação
  * ou serialização.
  *
- * @author Viasoft
+ * @author Thiago Bianeck
  * @version 1.0.0
- * @since 2024
+ * @since 2025
  */
 public class EmailProcessingException extends RuntimeException {
 

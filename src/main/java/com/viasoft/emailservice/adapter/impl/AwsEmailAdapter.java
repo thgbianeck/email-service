@@ -16,9 +16,9 @@ import org.springframework.stereotype.Component;
  * - Single Responsibility Principle (SRP): responsável apenas pela adaptação AWS
  * - Open/Closed Principle (OCP): aberto para extensão, fechado para modificação
  *
- * @author Viasoft
+ * @author Thiago Bianeck
  * @version 1.0.0
- * @since 2024
+ * @since 2025
  */
 @Component
 public class AwsEmailAdapter implements EmailAdapter<EmailAwsDTO> {

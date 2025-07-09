@@ -6,9 +6,9 @@ package com.viasoft.emailservice.exception;
  * Esta exceção é lançada quando os dados de email
  * não atendem aos critérios de validação.
  *
- * @author Viasoft
+ * @author Thiago Bianeck
  * @version 1.0.0
- * @since 2024
+ * @since 2025
  */
 public class InvalidEmailDataException extends RuntimeException {
 
