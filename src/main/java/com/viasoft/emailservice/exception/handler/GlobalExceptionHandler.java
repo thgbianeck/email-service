@@ -28,7 +28,11 @@ import java.util.Map;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
+    /**
+     * Logger para registrar eventos e erros da classe.
+     */
+    private static final Logger LOGGER =
+            LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
     /**
      * Trata exceções de validação de dados.
@@ -38,7 +42,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, Object>> handleValidationExceptions(
-            MethodArgumentNotValidException ex) {
+            final MethodArgumentNotValidException ex) {
 
         Map<String, Object> response = new HashMap<>();
         Map<String, String> errors = new HashMap<>();
@@ -55,7 +59,7 @@ public class GlobalExceptionHandler {
         response.put("message", "Falha na validação dos dados");
         response.put("errors", errors);
 
-        logger.warn("Erro de validação: {}", errors);
+        LOGGER.warn("Erro de validação: {}", errors);
 
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
@@ -68,7 +72,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(InvalidEmailDataException.class)
     public ResponseEntity<Map<String, Object>> handleInvalidEmailDataException(
-            InvalidEmailDataException ex) {
+            final InvalidEmailDataException ex) {
 
         Map<String, Object> response = new HashMap<>();
         response.put("timestamp", LocalDateTime.now());
@@ -76,7 +80,7 @@ public class GlobalExceptionHandler {
         response.put("error", "Dados de email inválidos");
         response.put("message", ex.getMessage());
 
-        logger.warn("Dados de email inválidos: {}", ex.getMessage());
+        LOGGER.warn("Dados de email inválidos: {}", ex.getMessage());
 
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
@@ -89,7 +93,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(EmailProcessingException.class)
     public ResponseEntity<Map<String, Object>> handleEmailProcessingException(
-            EmailProcessingException ex) {
+            final EmailProcessingException ex) {
 
         Map<String, Object> response = new HashMap<>();
         response.put("timestamp", LocalDateTime.now());
@@ -97,7 +101,7 @@ public class GlobalExceptionHandler {
         response.put("error", "Erro no processamento do email");
         response.put("message", ex.getMessage());
 
-        logger.error("Erro no processamento do email: {}", ex.getMessage(), ex);
+        LOGGER.error("Erro no processamento do email: {}", ex.getMessage(), ex);
 
         return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
@@ -110,7 +114,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<Map<String, Object>> handleIllegalArgumentException(
-            IllegalArgumentException ex) {
+            final IllegalArgumentException ex) {
 
         Map<String, Object> response = new HashMap<>();
         response.put("timestamp", LocalDateTime.now());
@@ -118,7 +122,7 @@ public class GlobalExceptionHandler {
         response.put("error", "Argumento inválido");
         response.put("message", ex.getMessage());
 
-        logger.warn("Argumento inválido: {}", ex.getMessage());
+        LOGGER.warn("Argumento inválido: {}", ex.getMessage());
 
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
@@ -130,7 +134,8 @@ public class GlobalExceptionHandler {
      * @return resposta com erro interno do servidor
      */
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<Map<String, Object>> handleGenericException(Exception ex) {
+    public ResponseEntity<Map<String, Object>> handleGenericException(
+            final Exception ex) {
 
         Map<String, Object> response = new HashMap<>();
         response.put("timestamp", LocalDateTime.now());
@@ -138,7 +143,7 @@ public class GlobalExceptionHandler {
         response.put("error", "Erro interno do servidor");
         response.put("message", "Ocorreu um erro inesperado");
 
-        logger.error("Erro inesperado: {}", ex.getMessage(), ex);
+        LOGGER.error("Erro inesperado: {}", ex.getMessage(), ex);
 
         return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
