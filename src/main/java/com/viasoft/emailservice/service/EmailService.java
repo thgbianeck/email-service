@@ -23,8 +23,10 @@ public interface EmailService {
      * - Imprimir o resultado no console
      *
      * @param emailRequest dados da requisição de email
-     * @throws com.viasoft.emailservice.exception.EmailProcessingException se ocorrer erro no processamento
-     * @throws com.viasoft.emailservice.exception.InvalidEmailDataException se os dados forem inválidos
+     * @throws com.viasoft.emailservice.exception.EmailProcessingException
+     *         se ocorrer erro no processamento
+     * @throws com.viasoft.emailservice.exception.InvalidEmailDataException
+     *         se os dados forem inválidos
      */
     void processEmail(EmailRequestDTO emailRequest);
 }
