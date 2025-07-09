@@ -11,15 +11,19 @@
  *
  * <h2>Principais componentes:</h2>
  * <ul>
- *   <li>{@link com.viasoft.emailservice.adapter.EmailAdapter} - Interface base</li>
+ *   <li>{@link com.viasoft.emailservice.adapter.EmailAdapter}
+ *   - Interface base</li>
  *   <li>Implementações específicas para cada provedor</li>
  * </ul>
  *
  * <h2>Padrões aplicados:</h2>
  * <ul>
- *   <li><strong>Adapter Pattern</strong> - Adaptação entre interfaces incompatíveis</li>
- *   <li><strong>Strategy Pattern</strong> - Seleção dinâmica de provedores</li>
- *   <li><strong>Dependency Inversion Principle</strong> - Inversão de dependências</li>
+ *   <li><strong>Adapter Pattern</strong> - Adaptação entre
+ *   interfaces incompatíveis</li>
+ *   <li><strong>Strategy Pattern</strong> - Seleção dinâmica de
+ *   provedores</li>
+ *   <li><strong>Dependency Inversion Principle</strong>
+ *   - Inversão de dependências</li>
  * </ul>
  *
  * @author Thiago Bianeck

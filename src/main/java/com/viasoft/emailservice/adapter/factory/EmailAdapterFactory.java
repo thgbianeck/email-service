@@ -19,8 +19,10 @@ import java.util.stream.Collectors;
  * no provedor configurado.
  *
  * Aplica os princípios:
- * - Single Responsibility Principle (SRP): responsável apenas pela criação de adaptadores
- * - Dependency Inversion Principle (DIP): depende de abstrações, não de implementações
+ * - Single Responsibility Principle (SRP): responsável apenas pela
+ *   criação de adaptadores
+ * - Dependency Inversion Principle (DIP): depende de abstrações,
+ *   não de implementações
  *
  * @author Thiago Bianeck
  * @version 1.0.0
@@ -29,6 +31,9 @@ import java.util.stream.Collectors;
 @Component
 public class EmailAdapterFactory {
 
+    /**
+     * Mapa de adaptadores indexados por tipo de provedor.
+     */
     private final Map<String, EmailAdapter<?>> adapters;
 
     /**
@@ -37,7 +42,7 @@ public class EmailAdapterFactory {
      * @param adapterList lista de adaptadores implementados
      */
     @Autowired
-    public EmailAdapterFactory(List<EmailAdapter<?>> adapterList) {
+    public EmailAdapterFactory(final List<EmailAdapter<?>> adapterList) {
         this.adapters = adapterList.stream()
                 .collect(Collectors.toMap(
                         EmailAdapter::getProviderType,
@@ -52,12 +57,13 @@ public class EmailAdapterFactory {
      * @return adaptador apropriado para o provedor
      * @throws EmailProcessingException se o provedor não for suportado
      */
-    public EmailAdapter<?> createAdapter(EmailProvider provider) {
+    public EmailAdapter<?> createAdapter(final EmailProvider provider) {
         EmailAdapter<?> adapter = adapters.get(provider.getValue());
 
         if (adapter == null) {
             throw new EmailProcessingException(
-                    "Adaptador não encontrado para o provedor: " + provider.getValue()
+                    "Adaptador não encontrado para o provedor: "
+                            + provider.getValue()
             );
         }
 
@@ -70,7 +76,7 @@ public class EmailAdapterFactory {
      * @param provider provedor a ser verificado
      * @return true se o provedor for suportado, false caso contrário
      */
-    public boolean isProviderSupported(EmailProvider provider) {
+    public boolean isProviderSupported(final EmailProvider provider) {
         return adapters.containsKey(provider.getValue());
     }
 
