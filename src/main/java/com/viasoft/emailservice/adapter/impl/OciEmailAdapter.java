@@ -13,8 +13,10 @@ import org.springframework.stereotype.Component;
  * dados do formato padrão para o formato específico da OCI.
  *
  * Aplica os princípios:
- * - Single Responsibility Principle (SRP): responsável apenas pela adaptação OCI
- * - Open/Closed Principle (OCP): aberto para extensão, fechado para modificação
+ * - Single Responsibility Principle (SRP): responsável apenas pela
+ *   adaptação OCI
+ * - Open/Closed Principle (OCP): aberto para extensão, fechado para
+ *   modificação
  *
  * @author Thiago Bianeck
  * @version 1.0.0
@@ -22,6 +24,26 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class OciEmailAdapter implements EmailAdapter<EmailOciDTO> {
+
+    /**
+     * Limite máximo de caracteres para endereços de email na OCI.
+     */
+    private static final int MAX_EMAIL_LENGTH = 40;
+
+    /**
+     * Limite máximo de caracteres para nomes de destinatário na OCI.
+     */
+    private static final int MAX_NAME_LENGTH = 50;
+
+    /**
+     * Limite máximo de caracteres para assunto do email na OCI.
+     */
+    private static final int MAX_SUBJECT_LENGTH = 100;
+
+    /**
+     * Limite máximo de caracteres para conteúdo do email na OCI.
+     */
+    private static final int MAX_CONTENT_LENGTH = 250;
 
     /**
      * Adapta os dados de email para o formato OCI.
@@ -35,9 +57,10 @@ public class OciEmailAdapter implements EmailAdapter<EmailOciDTO> {
      * @throws IllegalArgumentException se os dados excederem os limites da OCI
      */
     @Override
-    public EmailOciDTO adapt(EmailRequestDTO emailRequest) {
+    public EmailOciDTO adapt(final EmailRequestDTO emailRequest) {
         if (emailRequest == null) {
-            throw new IllegalArgumentException("EmailRequestDTO não pode ser nulo");
+            throw new IllegalArgumentException(
+                    "EmailRequestDTO não pode ser nulo");
         }
 
         // Validações específicas para OCI
@@ -68,35 +91,46 @@ public class OciEmailAdapter implements EmailAdapter<EmailOciDTO> {
      * @param emailRequest dados a serem validados
      * @throws IllegalArgumentException se algum limite for excedido
      */
-    private void validateOciLimits(EmailRequestDTO emailRequest) {
-        if (emailRequest.getEmailDestinatario() != null &&
-                emailRequest.getEmailDestinatario().length() > 40) {
+    private void validateOciLimits(final EmailRequestDTO emailRequest) {
+        if (emailRequest.getEmailDestinatario() != null
+                && emailRequest.getEmailDestinatario().length()
+                > MAX_EMAIL_LENGTH) {
             throw new IllegalArgumentException(
-                    "Email do destinatário excede o limite de 40 caracteres para OCI");
+                    "Email do destinatário excede o limite de "
+                            + MAX_EMAIL_LENGTH
+                            + " caracteres para OCI");
         }
 
-        if (emailRequest.getNomeDestinatario() != null &&
-                emailRequest.getNomeDestinatario().length() > 50) {
+        if (emailRequest.getNomeDestinatario() != null
+                && emailRequest.getNomeDestinatario().length()
+                > MAX_NAME_LENGTH) {
             throw new IllegalArgumentException(
-                    "Nome do destinatário excede o limite de 50 caracteres para OCI");
+                    "Nome do destinatário excede o limite de "
+                            + MAX_NAME_LENGTH
+                            + " caracteres para OCI");
         }
 
-        if (emailRequest.getEmailRemetente() != null &&
-                emailRequest.getEmailRemetente().length() > 40) {
+        if (emailRequest.getEmailRemetente() != null
+                && emailRequest.getEmailRemetente().length()
+                > MAX_EMAIL_LENGTH) {
             throw new IllegalArgumentException(
-                    "Email do remetente excede o limite de 40 caracteres para OCI");
+                    "Email do remetente excede o limite de "
+                            + MAX_EMAIL_LENGTH
+                            + " caracteres para OCI");
         }
 
-        if (emailRequest.getAssunto() != null &&
-                emailRequest.getAssunto().length() > 100) {
+        if (emailRequest.getAssunto() != null
+                && emailRequest.getAssunto().length() > MAX_SUBJECT_LENGTH) {
             throw new IllegalArgumentException(
-                    "Assunto excede o limite de 100 caracteres para OCI");
+                    "Assunto excede o limite de " + MAX_SUBJECT_LENGTH
+                            + " caracteres para OCI");
         }
 
-        if (emailRequest.getConteudo() != null &&
-                emailRequest.getConteudo().length() > 250) {
+        if (emailRequest.getConteudo() != null
+                && emailRequest.getConteudo().length() > MAX_CONTENT_LENGTH) {
             throw new IllegalArgumentException(
-                    "Conteúdo excede o limite de 250 caracteres para OCI");
+                    "Conteúdo excede o limite de " + MAX_CONTENT_LENGTH
+                            + " caracteres para OCI");
         }
     }
 }
