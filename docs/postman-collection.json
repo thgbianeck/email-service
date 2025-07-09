@@ -1,0 +1,681 @@
+{
+  "item": [
+    {
+      "name": "emails",
+      "description": "",
+      "item": [
+        {
+          "name": "send",
+          "description": "",
+          "item": [
+            {
+              "id": "6bf29c9c-517d-44e5-a33f-abd51163ca85",
+              "name": "Processar email",
+              "request": {
+                "name": "Processar email",
+                "description": {
+                  "content": "Processa dados de email adaptando para o provedor configurado (AWS/OCI)",
+                  "type": "text/plain"
+                },
+                "url": {
+                  "path": [
+                    "emails",
+                    "send"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"assunto\": \"Teste de Email\",\n  \"conteudo\": \"Este é um email de teste para validar o funcionamento da API.\",\n  \"emailDestinatario\": \"destinatario@exemplo.com\",\n  \"emailRemetente\": \"remetente@exemplo.com\",\n  \"nomeDestinatario\": \"João Silva\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "auth": null
+              },
+              "response": [
+                {
+                  "id": "52c9afe4-a21b-4471-b070-646a3aad8960",
+                  "name": "Email processado com sucesso",
+                  "originalRequest": {
+                    "url": {
+                      "path": [
+                        "emails",
+                        "send"
+                      ],
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "query": [],
+                      "variable": []
+                    },
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "method": "POST",
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"assunto\": : \"<string>\",\n  \"conteudo\": \"<string>\",\n  \"emailDestinatario\": \"<string>\",\n  \"emailRemetente\": \"<string>\",\n  \"nomeDestinatario\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "header": [],
+                  "cookie": [],
+                  "_postman_previewlanguage": "text"
+                },
+                {
+                  "id": "6ffb37ed-0beb-41cb-b566-ba68ddbaad23",
+                  "name": "Dados inválidos",
+                  "originalRequest": {
+                    "url": {
+                      "path": [
+                        "emails",
+                        "send"
+                      ],
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "query": [],
+                      "variable": []
+                    },
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "method": "POST",
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"assunto\": : \"<string>\",\n  \"conteudo\": \"<string>\",\n  \"emailDestinatario\": \"<string>\",\n  \"emailRemetente\": \"<string>\",\n  \"nomeDestinatario\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "body": "<string>",
+                  "cookie": [],
+                  "_postman_previewlanguage": "json"
+                },
+                {
+                  "id": "6882407f-d8d8-470b-9f45-630c17d2bbb3",
+                  "name": "Erro interno do servidor",
+                  "originalRequest": {
+                    "url": {
+                      "path": [
+                        "emails",
+                        "send"
+                      ],
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "query": [],
+                      "variable": []
+                    },
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "method": "POST",
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"assunto\": : \"<string>\",\n  \"conteudo\": \"<string>\",\n  \"emailDestinatario\": \"<string>\",\n  \"emailRemetente\": \"<string>\",\n  \"nomeDestinatario\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "body": "<string>",
+                  "cookie": [],
+                  "_postman_previewlanguage": "json"
+                }
+              ],
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "// Teste de Caminho Feliz",
+                      "pm.test(\"Status code deve ser 204 para sucesso\", function () {",
+                      "    pm.response.to.have.status(204);",
+                      "});",
+                      "",
+                      "pm.test(\"Tempo de resposta deve ser menor que 5000ms\", function () {",
+                      "    pm.expect(pm.response.responseTime).to.be.below(5000);",
+                      "});",
+                      "",
+                      "pm.test(\"Content-Type deve estar presente nos headers\", function () {",
+                      "    pm.response.to.have.header(\"Content-Type\");",
+                      "});",
+                      "",
+                      "// Teste de Caminho Triste",
+                      "pm.test(\"Deve retornar erro 400 para dados inválidos\", function () {",
+                      "    if (pm.response.code === 400) {",
+                      "        pm.response.to.have.status(400);",
+                      "        pm.test(\"Deve ter Content-Type application/json para erro\", function () {",
+                      "            pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+                      "        });",
+                      "    }",
+                      "});",
+                      "",
+                      "pm.test(\"Deve retornar erro 500 para erro interno\", function () {",
+                      "    if (pm.response.code === 500) {",
+                      "        pm.response.to.have.status(500);",
+                      "        pm.test(\"Deve ter Content-Type application/json para erro interno\", function () {",
+                      "            pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+                      "        });",
+                      "    }",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                },
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      "// Validação dos dados antes do envio",
+                      "const requestBody = JSON.parse(pm.request.body.raw);",
+                      "",
+                      "pm.test(\"Validar estrutura do body antes do envio\", function () {",
+                      "    pm.expect(requestBody).to.have.property('assunto');",
+                      "    pm.expect(requestBody).to.have.property('conteudo');",
+                      "    pm.expect(requestBody).to.have.property('emailDestinatario');",
+                      "    pm.expect(requestBody).to.have.property('emailRemetente');",
+                      "    pm.expect(requestBody).to.have.property('nomeDestinatario');",
+                      "});",
+                      "",
+                      "// Validação de formato de email",
+                      "const emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;",
+                      "",
+                      "pm.test(\"Email destinatário deve ter formato válido\", function () {",
+                      "    pm.expect(requestBody.emailDestinatario).to.match(emailRegex);",
+                      "});",
+                      "",
+                      "pm.test(\"Email remetente deve ter formato válido\", function () {",
+                      "    pm.expect(requestBody.emailRemetente).to.match(emailRegex);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              }
+            },
+            {
+              "id": "test-email-campos-obrigatorios",
+              "name": "Teste - Campos Obrigatórios Ausentes",
+              "request": {
+                "name": "Teste - Campos Obrigatórios Ausentes",
+                "description": {
+                  "content": "Teste de caminho triste: envio sem campos obrigatórios",
+                  "type": "text/plain"
+                },
+                "url": {
+                  "path": [
+                    "emails",
+                    "send"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"assunto\": : \"\",\n  \"conteudo\": \"\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "auth": null
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Deve retornar erro 400 para campos obrigatórios ausentes\", function () {",
+                      "    pm.response.to.have.status(400);",
+                      "});",
+                      "",
+                      "pm.test(\"Deve retornar Content-Type application/json\", function () {",
+                      "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+                      "});",
+                      "",
+                      "pm.test(\"Resposta deve conter mensagem de erro\", function () {",
+                      "    pm.expect(pm.response.text()).to.not.be.empty;",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "test-email-formato-invalido",
+              "name": "Teste - Email com Formato Inválido",
+              "request": {
+                "name": "Teste - Email com Formato Inválido",
+                "description": {
+                  "content": "Teste de caminho triste: email com formato inválido",
+                  "type": "text/plain"
+                },
+                "url": {
+                  "path": [
+                    "emails",
+                    "send"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"assunto\": : \"Teste Email Inválido\",\n  \"conteudo\": \"Testando email com formato inválido\",\n  \"emailDestinatario\": \"email-invalido\",\n  \"emailRemetente\": \"remetente@exemplo.com\",\n  \"nomeDestinatario\": \"Teste\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "auth": null
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Deve retornar erro 400 para email inválido\", function () {",
+                      "    pm.response.to.have.status(400);",
+                      "});",
+                      "",
+                      "pm.test(\"Resposta deve indicar erro de validação\", function () {",
+                      "    pm.expect(pm.response.text()).to.not.be.empty;",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "test-email-sucesso-completo",
+              "name": "Teste - Envio Completo com Sucesso",
+              "request": {
+                "name": "Teste - Envio Completo com Sucesso",
+                "description": {
+                  "content": "Teste de caminho feliz: envio completo com todos os dados válidos",
+                  "type": "text/plain"
+                },
+                "url": {
+                  "path": [
+                    "emails",
+                    "send"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"assunto\": : \"Email de Teste - Caminho Feliz\",\n  \"conteudo\": \"<h1>Teste de Email</h1><p>Este é um email de teste com conteúdo HTML válido para verificar o funcionamento correto da API.</p><p>Data: {{$timestamp}}</p>\",\n  \"emailDestinatario\": \"teste.destinatario@exemplo.com\",\n  \"emailRemetente\": \"noreply@empresa.com\",\n  \"nomeDestinatario\": \"Maria Silva Santos\"\n}",
+            "options": {
+              "raw": {
+                "headerFamily": "json",
+                "language": "json"
+              }
+            }
+            },
+            "auth": null
+            },
+            "event": [
+              {
+                "listen": "test",
+                "script": {
+                  "exec": [
+                    "pm.test(\"Status code deve ser 204 para sucesso\", function () {",
+                    "    pm.response.to.have.status(204);",
+                    "});",
+                    "",
+                    "pm.test(\"Tempo de resposta deve ser aceitável\", function () {",
+                    "    pm.expect(pm.response.responseTime).to.be.below(10000);",
+                    "});",
+                    "",
+                    "pm.test(\"Não deve haver conteúdo no body da resposta\", function () {",
+                    "    pm.expect(pm.response.text()).to.be.empty;",
+                    "});",
+                    "",
+                    "// Salvar resultado do teste para relatório",
+                    "pm.globals.set(\"ultimo_teste_email_sucesso\", new Date().toISOString());"
+                  ],
+                  "type": "text/javascript"
+                }
+              }
+            ]
+          }
+          ]
+        },
+        {
+          "name": "health",
+          "description": "",
+          "item": [
+            {
+              "id": "fb41e31b-9886-4957-8e55-fde39a223371",
+              "name": "Verificar saúde da API",
+              "request": {
+                "name": "Verificar saúde da API",
+                "description": {
+                  "content": "Endpoint para verificação do status da aplicação",
+                  "type": "text/plain"
+                },
+                "url": {
+                  "path": [
+                    "emails",
+                    "health"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {},
+                "auth": null
+              },
+              "response": [
+                {
+                  "id": "4a9e5de6-7cc5-439b-b6f2-eca607b1fdc7",
+                  "name": "Aplicação funcionando corretamente",
+                  "originalRequest": {
+                    "url": {
+                      "path": [
+                        "emails",
+                        "health"
+                      ],
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "query": [],
+                      "variable": []
+                    },
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "*/*"
+                      }
+                    ],
+                    "method": "GET",
+                    "body": {}
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "*/*"
+                    }
+                  ],
+                  "body": "<string>",
+                  "cookie": [],
+                  "_postman_previewlanguage": "text"
+                }
+              ],
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "// Teste de Caminho Feliz para Health Check",
+                      "pm.test(\"Status code deve ser 200\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});",
+                      "",
+                      "pm.test(\"Tempo de resposta deve ser rápido\", function () {",
+                      "    pm.expect(pm.response.responseTime).to.be.below(2000);",
+                      "});",
+                      "",
+                      "pm.test(\"Deve retornar uma resposta\", function () {",
+                      "    pm.expect(pm.response.text()).to.not.be.empty;",
+                      "});",
+                      "",
+                      "// Teste de disponibilidade",
+                      "pm.test(\"API deve estar disponível\", function () {",
+                      "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 202]);",
+                      "});",
+                      "",
+                      "// Salvar status da API",
+                      "pm.globals.set(\"api_status\", pm.response.code === 200 ? \"UP\" : \"DOWN\");",
+                      "pm.globals.set(\"last_health_check\", new Date().toISOString());"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              }
+            },
+            {
+              "id": "test-health-timeout",
+              "name": "Teste - Health Check com Timeout",
+              "request": {
+                "name": "Teste - Health Check com Timeout",
+                "description": {
+                  "content": "Teste de caminho triste: verificar comportamento com timeout",
+                  "type": "text/plain"
+                },
+                "url": {
+                  "path": [
+                    "emails",
+                    "health"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {},
+                "auth": null
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "// Teste para verificar se a API responde dentro do tempo esperado",
+                      "pm.test(\"Não deve haver timeout na resposta\", function () {",
+                      "    pm.expect(pm.response.responseTime).to.be.below(5000);",
+                      "});",
+                      "",
+                      "pm.test(\"Deve retornar status válido mesmo sob carga\", function () {",
+                      "    pm.expect(pm.response.code).to.be.oneOf([200, 503, 429]);",
+                      "});",
+                      "",
+                      "// Log para monitoramento",
+                      "console.log(\"Health check response time: \" + pm.response.responseTime + \"ms\");"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "exec": [
+          "// Script global executado antes de cada requisição",
+          "pm.globals.set(\"timestamp\", new Date().toISOString());",
+          "pm.globals.set(\"test_run_id\", pm.variables.replaceIn('{{$guid}}'));",
+          "",
+          "// Log da requisição",
+          "console.log(\"Executando: \" + pm.info.requestName + \" em \" + new Date().toLocaleString());"
+        ],
+        "type": "text/javascript"
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "exec": [
+          "// Script global executado após cada requisição",
+          "pm.test(\"Resposta deve ser recebida\", function () {",
+          "    pm.expect(pm.response).to.not.be.undefined;",
+          "});",
+          "",
+          "// Log do resultado",
+          "console.log(\"Resposta: \" + pm.response.status + \" (\" + pm.response.code + \") em \" + pm.response.responseTime + \"ms\");"
+        ],
+        "type": "text/javascript"
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080/api/v1"
+    },
+    {
+      "key": "test_email_destinatario",
+      "value": "teste@exemplo.com"
+    },
+    {
+      "key": "test_email_remetente",
+      "value": "noreply@empresa.com"
+    }
+  ],
+  "info": {
+    "_postman_id": "97d89762-db29-4aef-9654-fcbe2783c440",
+    "name": "Email Service API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API para envio de emails com adaptação para múltiplos provedores\n\nContact Support:\n Name: Viasoft\n Email: contato@viasoft.com.br",
+      "type": "text/plain"
+    }
+  }
+}
