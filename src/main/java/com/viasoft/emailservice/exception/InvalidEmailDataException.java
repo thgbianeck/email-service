@@ -17,7 +17,7 @@ public class InvalidEmailDataException extends RuntimeException {
      *
      * @param message mensagem de erro
      */
-    public InvalidEmailDataException(String message) {
+    public InvalidEmailDataException(final String message) {
         super(message);
     }
 
@@ -27,7 +27,8 @@ public class InvalidEmailDataException extends RuntimeException {
      * @param message mensagem de erro
      * @param cause causa da exceção
      */
-    public InvalidEmailDataException(String message, Throwable cause) {
+    public InvalidEmailDataException(final String message,
+                                     final Throwable cause) {
         super(message, cause);
     }
 }
