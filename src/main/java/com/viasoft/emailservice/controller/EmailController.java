@@ -19,10 +19,8 @@ import org.springframework.web.bind.annotation.*;
 
 /**
  * Controller REST para operações de email.
- *
  * Esta classe expõe endpoints REST para processamento
  * de emails, seguindo as melhores práticas de APIs RESTful.
- *
  * Aplica os princípios:
  * - Single Responsibility Principle (SRP): responsável apenas pela camada de apresentação
  * - Dependency Inversion Principle (DIP): depende da abstração do serviço
