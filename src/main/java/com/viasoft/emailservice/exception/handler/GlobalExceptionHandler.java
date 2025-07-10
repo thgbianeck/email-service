@@ -1,5 +1,7 @@
 package com.viasoft.emailservice.exception.handler;
 
+import com.viasoft.emailservice.dto.ErrorResponseDTO;
+import com.viasoft.emailservice.dto.ValidationErrorResponseDTO;
 import com.viasoft.emailservice.exception.EmailProcessingException;
 import com.viasoft.emailservice.exception.InvalidEmailDataException;
 import org.slf4j.Logger;
@@ -11,7 +13,6 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,7 +20,8 @@ import java.util.Map;
  * Manipulador global de exceções.
  *
  * Esta classe centraliza o tratamento de exceções da aplicação,
- * fornecendo respostas padronizadas para diferentes tipos de erros.
+ * fornecendo respostas padronizadas para diferentes tipos de erros
+ * utilizando DTOs específicos.
  *
  * @author Thiago Bianeck
  * @version 1.0.0
@@ -41,10 +43,9 @@ public class GlobalExceptionHandler {
      * @return resposta com detalhes dos erros de validação
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<Map<String, Object>> handleValidationExceptions(
+    public ResponseEntity<ValidationErrorResponseDTO> handleValidationExceptions(
             final MethodArgumentNotValidException ex) {
 
-        Map<String, Object> response = new HashMap<>();
         Map<String, String> errors = new HashMap<>();
 
         ex.getBindingResult().getAllErrors().forEach((error) -> {
@@ -53,11 +54,12 @@ public class GlobalExceptionHandler {
             errors.put(fieldName, errorMessage);
         });
 
-        response.put("timestamp", LocalDateTime.now());
-        response.put("status", HttpStatus.BAD_REQUEST.value());
-        response.put("error", "Dados inválidos");
-        response.put("message", "Falha na validação dos dados");
-        response.put("errors", errors);
+        ValidationErrorResponseDTO response = new ValidationErrorResponseDTO(
+                HttpStatus.BAD_REQUEST.value(),
+                "Dados inválidos",
+                "Falha na validação dos dados",
+                errors
+        );
 
         LOGGER.warn("Erro de validação: {}", errors);
 
@@ -71,14 +73,14 @@ public class GlobalExceptionHandler {
      * @return resposta com detalhes do erro
      */
     @ExceptionHandler(InvalidEmailDataException.class)
-    public ResponseEntity<Map<String, Object>> handleInvalidEmailDataException(
+    public ResponseEntity<ErrorResponseDTO> handleInvalidEmailDataException(
             final InvalidEmailDataException ex) {
 
-        Map<String, Object> response = new HashMap<>();
-        response.put("timestamp", LocalDateTime.now());
-        response.put("status", HttpStatus.BAD_REQUEST.value());
-        response.put("error", "Dados de email inválidos");
-        response.put("message", ex.getMessage());
+        ErrorResponseDTO response = new ErrorResponseDTO(
+                HttpStatus.BAD_REQUEST.value(),
+                "Dados de email inválidos",
+                ex.getMessage()
+        );
 
         LOGGER.warn("Dados de email inválidos: {}", ex.getMessage());
 
@@ -92,14 +94,14 @@ public class GlobalExceptionHandler {
      * @return resposta com detalhes do erro
      */
     @ExceptionHandler(EmailProcessingException.class)
-    public ResponseEntity<Map<String, Object>> handleEmailProcessingException(
+    public ResponseEntity<ErrorResponseDTO> handleEmailProcessingException(
             final EmailProcessingException ex) {
 
-        Map<String, Object> response = new HashMap<>();
-        response.put("timestamp", LocalDateTime.now());
-        response.put("status", HttpStatus.INTERNAL_SERVER_ERROR.value());
-        response.put("error", "Erro no processamento do email");
-        response.put("message", ex.getMessage());
+        ErrorResponseDTO response = new ErrorResponseDTO(
+                HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                "Erro no processamento do email",
+                ex.getMessage()
+        );
 
         LOGGER.error("Erro no processamento do email: {}", ex.getMessage(), ex);
 
@@ -113,14 +115,14 @@ public class GlobalExceptionHandler {
      * @return resposta com detalhes do erro
      */
     @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<Map<String, Object>> handleIllegalArgumentException(
+    public ResponseEntity<ErrorResponseDTO> handleIllegalArgumentException(
             final IllegalArgumentException ex) {
 
-        Map<String, Object> response = new HashMap<>();
-        response.put("timestamp", LocalDateTime.now());
-        response.put("status", HttpStatus.BAD_REQUEST.value());
-        response.put("error", "Argumento inválido");
-        response.put("message", ex.getMessage());
+        ErrorResponseDTO response = new ErrorResponseDTO(
+                HttpStatus.BAD_REQUEST.value(),
+                "Argumento inválido",
+                ex.getMessage()
+        );
 
         LOGGER.warn("Argumento inválido: {}", ex.getMessage());
 
@@ -134,14 +136,14 @@ public class GlobalExceptionHandler {
      * @return resposta com erro interno do servidor
      */
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<Map<String, Object>> handleGenericException(
+    public ResponseEntity<ErrorResponseDTO> handleGenericException(
             final Exception ex) {
 
-        Map<String, Object> response = new HashMap<>();
-        response.put("timestamp", LocalDateTime.now());
-        response.put("status", HttpStatus.INTERNAL_SERVER_ERROR.value());
-        response.put("error", "Erro interno do servidor");
-        response.put("message", "Ocorreu um erro inesperado");
+        ErrorResponseDTO response = new ErrorResponseDTO(
+                HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                "Erro interno do servidor",
+                "Ocorreu um erro inesperado"
+        );
 
         LOGGER.error("Erro inesperado: {}", ex.getMessage(), ex);
 
