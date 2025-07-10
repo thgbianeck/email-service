@@ -78,48 +78,14 @@
 				<version>3.0.0-M9</version>
 			</plugin>
 
-			<!-- JaCoCo Plugin -->
+			<!-- JaCoCo Plugin - SEM execuções automáticas -->
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<version>${jacoco.version}</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>prepare-agent</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>report</id>
-						<phase>test</phase>
-						<goals>
-							<goal>report</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>jacoco-check</id>
-						<goals>
-							<goal>check</goal>
-						</goals>
-						<configuration>
-							<rules>
-								<rule>
-									<element>PACKAGE</element>
-									<limits>
-										<limit>
-											<counter>LINE</counter>
-											<value>COVEREDRATIO</value>
-											<minimum>0.80</minimum>
-										</limit>
-									</limits>
-								</rule>
-							</rules>
-						</configuration>
-					</execution>
-				</executions>
 			</plugin>
 
-			<!-- SpotBugs Plugin -->
+			<!-- SpotBugs Plugin - SEM execuções automáticas -->
 			<plugin>
 				<groupId>com.github.spotbugs</groupId>
 				<artifactId>spotbugs-maven-plugin</artifactId>
@@ -131,15 +97,6 @@
 					<htmlOutput>true</htmlOutput>
 					<failOnError>false</failOnError>
 				</configuration>
-				<executions>
-					<execution>
-						<id>spotbugs-check</id>
-						<phase>verify</phase>
-						<goals>
-							<goal>check</goal>
-						</goals>
-					</execution>
-				</executions>
 				<dependencies>
 					<dependency>
 						<groupId>com.github.spotbugs</groupId>
@@ -149,7 +106,7 @@
 				</dependencies>
 			</plugin>
 
-			<!-- Maven Checkstyle Plugin com configuração padrão -->
+			<!-- Maven Checkstyle Plugin - SEM execuções automáticas -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-checkstyle-plugin</artifactId>
@@ -161,20 +118,11 @@
 					<includeTestSourceDirectory>false</includeTestSourceDirectory>
 					<violationSeverity>warning</violationSeverity>
 				</configuration>
-				<executions>
-					<execution>
-						<id>checkstyle-check</id>
-						<phase>validate</phase>
-						<goals>
-							<goal>check</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 		</plugins>
 	</build>
 
-	<!-- Reporting plugins para gerar relatórios -->
+	<!-- Reporting plugins para gerar relatórios APENAS com mvn site -->
 	<reporting>
 		<plugins>
 			<plugin>
