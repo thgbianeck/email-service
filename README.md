@@ -335,9 +335,9 @@ Após iniciar a aplicação, você verá logs similares a:
 ```
 
 **Endpoints de Verificação:**
-- **Health Check**: http://localhost:8080/actuator/health
-- **Swagger UI**: http://localhost:8080/swagger-ui.html
-- **Métricas**: http://localhost:8080/actuator/metrics
+- **Health Check**: http://localhost:8080/api/v1/actuator/health
+- **Swagger UI**: http://localhost:8080/api/v1/swagger-ui.html
+- **Métricas**: http://localhost:8080/api/v1/actuator/metrics
 
 ## 📖 Documentação da API
 
@@ -345,7 +345,7 @@ Após iniciar a aplicação, você verá logs similares a:
 
 Após iniciar a aplicação, acesse a documentação interativa:
 
-**URL:** http://localhost:8080/swagger-ui.html
+**URL:** http://localhost:8080/api/v1/swagger-ui.html
 
 ### Endpoints Disponíveis
 
@@ -424,7 +424,7 @@ Verifica se a aplicação está funcionando.
 
 #### Teste com Dados Válidos
 ```bash
-curl -X POST http://localhost:8080/emails/send \
+curl -X POST http://localhost:8080/api/v1/emails/send \
   -H "Content-Type: application/json" \
   -d '{
     "emailDestinatario": "teste@exemplo.com",
@@ -437,7 +437,7 @@ curl -X POST http://localhost:8080/emails/send \
 
 #### Teste com Email Inválido
 ```bash
-curl -X POST http://localhost:8080/emails/send \
+curl -X POST http://localhost:8080/api/v1/emails/send \
   -H "Content-Type: application/json" \
   -d '{
     "emailDestinatario": "email-invalido",
