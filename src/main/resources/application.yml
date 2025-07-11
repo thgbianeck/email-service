@@ -1,6 +1,6 @@
 # Configuração do provedor de email (AWS ou OCI)
 mail:
-  integracao: AWS
+  integracao: OCI
 
 # Configurações da aplicação
 server:
